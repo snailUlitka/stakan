@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+.venv/
+venv/
+
+# Envs
+.env
+.env.*
+!.env.example
+
+# Builds
+.build/
+build
+
+# uv
+.python-version
