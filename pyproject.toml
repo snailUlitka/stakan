@@ -4,7 +4,8 @@ version = "0.1.0"
 description = "S.T.A.K.A.N. — Semantic Textual Analysis & Knowledge Aggregation Network"
 readme = "README.md"
 authors = [
-    { name = "Mikhail Polevoda", email = "snail1704@gmail.com" }
+    { name = "Mikhail Polevoda", email = "snail1704@gmail.com" },
+    { name = "Yulia Yanaeva", email = "anaevaulia5@gmail.com" },
 ]
 requires-python = ">=3.12"
 dependencies = []
