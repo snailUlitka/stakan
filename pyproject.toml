@@ -96,6 +96,7 @@ docstring-code-line-length = "dynamic"
 venvPath = "."
 venv = ".venv"
 exclude = ["./.venv"]
+pythonVersion = "3.12"
 
 [tool.pytest.ini_options]
 minversion = "7.0"
