@@ -21,7 +21,7 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 api = [
-    "fastapi[standart]>=0.115.12",
+    "fastapi[standard]>=0.115.12",
 ]
 cli = [
     "typer>=0.16.0",
