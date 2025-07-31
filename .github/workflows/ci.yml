@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Sync dependencies from uv.lock
+        run: uv sync --locked
+
+      - name: Lint & auto-fix with Ruff
+        run: uvx ruff check --fix
+
+      - name: Format imports & code with Ruff Formatter
+        run: uvx ruff format
+
+      - name: Commit fixes (if any)
+        uses: stefanzweifel/git-auto-commit-action@v6
+        with:
+          commit_message: "chore: apply ruff fixes and formatting"
+
+      - name: Run tests
+        run: uv run pytest
