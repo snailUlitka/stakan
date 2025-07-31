@@ -25,7 +25,8 @@ def simple_cases(request: pytest.FixtureRequest) -> dict[str, Any]:
     return request.param
 
 
-def test_simple_hard_split(simple_cases: dict[str, Any]):  # noqa: ANN201
+@pytest.mark.unit
+def test_simple_hard_split(simple_cases: dict[str, Any]):
     cfg = simple_cases
     r = Recursive(chunk_size=cfg["chunk_size"], overlap=cfg["overlap"])
     chunks = r.split(cfg["doc"])
@@ -52,7 +53,8 @@ def sep_cases(request: pytest.FixtureRequest) -> dict[str, Any]:
     return request.param
 
 
-def test_separator_splitting(sep_cases: dict[str, Any]):  # noqa: ANN201
+@pytest.mark.unit
+def test_separator_splitting(sep_cases: dict[str, Any]):
     cfg = sep_cases
     r = Recursive(chunk_size=cfg["chunk_size"], overlap=cfg["overlap"])
     chunks = r.split(cfg["doc"])
@@ -79,7 +81,8 @@ def edge_cases(request: pytest.FixtureRequest) -> dict[str, Any]:
     return request.param
 
 
-def test_edge_parameters(edge_cases: dict[str, Any]):  # noqa: ANN201
+@pytest.mark.unit
+def test_edge_parameters(edge_cases: dict[str, Any]):
     cfg = edge_cases
     r = Recursive(chunk_size=cfg["chunk_size"], overlap=cfg["overlap"])
     if "raises" in cfg:
@@ -90,7 +93,8 @@ def test_edge_parameters(edge_cases: dict[str, Any]):  # noqa: ANN201
         assert chunks == cfg["expected"]
 
 
-def test_zero_chunk_size_raises():  # noqa: ANN201
+@pytest.mark.unit
+def test_zero_chunk_size_raises():
     msg = "Invalid split step: 0 (chunk_size=0, overlap=1)"
     with pytest.raises(ValueError, match=re.escape(msg)):
         Recursive(chunk_size=0, overlap=1).split("text")

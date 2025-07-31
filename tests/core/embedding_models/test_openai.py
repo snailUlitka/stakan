@@ -12,6 +12,9 @@ from stakan.core.embedding_models.openai import OpenAIEmbedding
 # TODO: Add global test configuration with Pydantic-Settings
 # https://github.com/snailUlitka/stakan/issues/17
 
+# TODO: Add integration tests with Ollama, etc.
+# https://github.com/snailUlitka/stakan/issues/21
+
 
 @pytest.fixture(scope="session")
 def ollama_url() -> str:
@@ -23,6 +26,7 @@ def model_name() -> str:
     return os.getenv("OPENAI_EMBEDDING_MODEL", "nomic-embed-text")
 
 
+@pytest.mark.integration
 def test_ollama_connection(ollama_url: str):
     for _ in range(10):
         try:
@@ -41,6 +45,7 @@ def test_ollama_connection(ollama_url: str):
     assert isinstance(data["data"], list)
 
 
+@pytest.mark.integration
 def test_embedding_method(ollama_url: str, model_name: str):
     emb = OpenAIEmbedding(model=model_name, api_key="ollama", base_url=ollama_url)
 
@@ -50,6 +55,7 @@ def test_embedding_method(ollama_url: str, model_name: str):
     assert all(isinstance(x, float) for x in result)
 
 
+@pytest.mark.unit
 def test_embedding_method_monkeypatch(monkeypatch: pytest.MonkeyPatch):
     dummy_embedding = [0.1, 0.2, 0.3]
 
