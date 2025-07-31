@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 jobs:
-  lint-test:
+  format-lint-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +19,7 @@ jobs:
         uses: astral-sh/setup-uv@v6
 
       - name: Sync dependencies from uv.lock
-        run: uv sync --locked
+        run: uv sync --all-groups --locked
 
       - name: Lint & auto-fix with Ruff
         run: uvx ruff check --fix
@@ -32,5 +32,9 @@ jobs:
         with:
           commit_message: "chore: apply ruff fixes and formatting"
 
-      - name: Run tests
-        run: uv run pytest
+      - name: Run unit tests
+        run: uv run --locked pytest -m unit
+
+# TODO: Add integration tests with Ollama, etc.
+# use `uv run --locked pytest -m integration`
+# https://github.com/snailUlitka/stakan/issues/21

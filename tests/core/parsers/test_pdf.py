@@ -46,6 +46,7 @@ startxref
 """
 
 
+@pytest.mark.unit
 def test_parse(sample_pdf_bytes: bytes) -> None:
     parser = PDFParser()
 
