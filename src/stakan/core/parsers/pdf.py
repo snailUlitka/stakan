@@ -28,9 +28,7 @@ class PDFParser:
 
     def parse(self, document: bytes) -> str:
         """Parse document bytes into `Document`."""
-        converter = DocumentConverter()
-
-        result = converter.convert(
+        result = self._doc_converter.convert(
             source=DocumentStream(name="", stream=BytesIO(document)),
         )
 
