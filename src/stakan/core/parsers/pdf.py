@@ -27,7 +27,12 @@ class PDFParser:
         )
 
     def parse(self, document: bytes) -> str:
-        """Parse document bytes into `Document`."""
+        """Convert PDF bytes to Markdown text.
+
+        The PDF content is processed via Docling with OCR disabled and
+        table-structure analysis enabled. The extracted content is
+        returned as a Markdown string.
+        """
         converter = DocumentConverter()
 
         result = converter.convert(
