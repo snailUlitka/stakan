@@ -1,4 +1,4 @@
-"""Tests for OpenAI (and API compability) embedding models."""
+"""Tests for OpenAI (and API compatibility) embedding models."""
 
 import time
 from types import SimpleNamespace
