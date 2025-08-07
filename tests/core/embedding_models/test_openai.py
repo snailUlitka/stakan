@@ -1,6 +1,5 @@
 """Tests for OpenAI (and API compability) embedding models."""
 
-import os
 import time
 from types import SimpleNamespace
 
@@ -8,29 +7,19 @@ import pytest
 import requests
 
 from stakan.core.embedding_models.openai import OpenAIEmbedding
-
-# TODO: Add global test configuration with Pydantic-Settings
-# https://github.com/snailUlitka/stakan/issues/17
+from tests.config import Settings
 
 # TODO: Add integration tests with Ollama, etc.
 # https://github.com/snailUlitka/stakan/issues/21
 
 
-@pytest.fixture(scope="session")
-def ollama_url() -> str:
-    return os.getenv("OPENAI_BASE_URL", "http://localhost:11434/v1")
-
-
-@pytest.fixture(scope="session")
-def model_name() -> str:
-    return os.getenv("OPENAI_EMBEDDING_MODEL", "nomic-embed-text")
-
-
 @pytest.mark.integration
-def test_ollama_connection(ollama_url: str):
+def test_ollama_connection(settings: Settings):
+    if not settings.use_ollama:
+        pytest.skip("Ollama usage disabled in tests")
     for _ in range(10):
         try:
-            resp = requests.get(f"{ollama_url}/models", timeout=5)
+            resp = requests.get(f"{settings.ollama_url}/models", timeout=5)
             if resp.status_code == 200:
                 break
         except requests.ConnectionError:
@@ -46,8 +35,14 @@ def test_ollama_connection(ollama_url: str):
 
 
 @pytest.mark.integration
-def test_embedding_method(ollama_url: str, model_name: str):
-    emb = OpenAIEmbedding(model=model_name, api_key="ollama", base_url=ollama_url)
+def test_embedding_method(settings: Settings):
+    if not settings.use_ollama:
+        pytest.skip("Ollama usage disabled in tests")
+    emb = OpenAIEmbedding(
+        model=settings.model_name,
+        api_key=settings.api_key,
+        base_url=str(settings.ollama_url),
+    )
 
     result = emb.embedding("test query")
 
