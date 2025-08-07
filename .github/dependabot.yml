@@ -1,0 +1,27 @@
+version: 2
+updates:
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "uv"
+    allow:
+      - dependency-type: "all"
+    groups:
+      patch-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+        labels:
+          - "patch"
+      major-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "major"
+        labels:
+          - "major"
