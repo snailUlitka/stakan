@@ -7,7 +7,7 @@ authors = [
     { name = "Mikhail Polevoda", email = "snail1704@gmail.com" },
     { name = "Yulia Yanaeva", email = "anaevaulia5@gmail.com" },
 ]
-requires-python = ">=3.12"
+requires-python = ">=3.12,<3.13"
 dependencies = [
     "docling>=2.36.1",
     "openai>=1.86.0",
