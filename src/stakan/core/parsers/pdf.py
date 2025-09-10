@@ -33,9 +33,7 @@ class PDFParser:
         table-structure analysis enabled. The extracted content is
         returned as a Markdown string.
         """
-        converter = DocumentConverter()
-
-        result = converter.convert(
+        result = self._doc_converter.convert(
             source=DocumentStream(name="", stream=BytesIO(document)),
         )
 
