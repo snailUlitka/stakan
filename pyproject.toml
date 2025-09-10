@@ -12,6 +12,7 @@ dependencies = [
     "docling>=2.36.1",
     "openai>=1.86.0",
     "pydantic>=2.11.7",
+    "pydantic-settings>=2.3.0",
     "qdrant-client>=1.14.2",
 ]
 
@@ -29,6 +30,7 @@ cli = [
 dev = [
     "pytest>=8.4.0",
     "pytest-asyncio>=1.0.0",
+    "requests>=2.32.4",
     "ruff>=0.11.13",
 ]
 
@@ -68,7 +70,7 @@ target-version = "py312"
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["COM812"]
+ignore = ["COM812", "TD002", "FIX002"]
 
 exclude = []
 
@@ -82,7 +84,7 @@ convention = "numpy"
 
 [tool.ruff.lint.per-file-ignores]
 # "tests/*" = ["D", "ANN201", "PLR2004", "S101", "ANN001"]
-"tests/*" = []
+"tests/*" = ["D", "S101", "PLR2004", "ANN201"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -99,6 +101,10 @@ exclude = ["./.venv"]
 pythonVersion = "3.12"
 
 [tool.pytest.ini_options]
+markers = [
+    "unit: unit tests",
+    "integration: integration tests"
+]
 minversion = "7.0"
 addopts = "-ra -q"
 testpaths = ["tests"]

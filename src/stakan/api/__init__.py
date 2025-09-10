@@ -1,1 +1,1 @@
-"""A package for parser API."""
+"""REST API for STAKAN."""
