@@ -1,6 +1,8 @@
-from fastapi import FastAPI
-from stakan.api.v1.routes.storage import router
+"""Module for connecting routers to the app."""
 
+from fastapi import FastAPI
+
+from stakan.api.v1.routes.storage import router
 
 app = FastAPI(
     title="PDF Parser API",
