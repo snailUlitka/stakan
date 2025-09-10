@@ -16,12 +16,8 @@ updates:
           - "*"
         update-types:
           - "patch"
-        labels:
-          - "patch"
       major-updates:
         patterns:
           - "*"
         update-types:
-          - "major"
-        labels:
           - "major"
