@@ -11,12 +11,12 @@ from stakan.core.storages.qdrant import QdrantStorage
 
 router = APIRouter()
 
-@router.get("/", response_model=StorageResponse)
-def get_storage():  #noqa: ANN201 D103
-    return "no storage yet"
+@router.get("/")
+def get_storage() -> StorageResponse:  #noqa: D103
+    raise NotImplementedError
 
-@router.get("/{file_id}", response_model=FileResponse)
-def get_file(file_id: UUID) -> ...:  #noqa: D103
+@router.get("/{file_id}")
+def get_file(file_id: UUID) -> FileResponse:  #noqa: D103
     raise NotImplementedError
 
 @router.post("/")
