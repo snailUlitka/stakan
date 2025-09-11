@@ -11,6 +11,7 @@ from stakan.core.storages.qdrant import QdrantStorage
 
 router = APIRouter()
 
+
 @router.get("/")
 def get_storage() -> StorageResponse:  #noqa: D103
     raise NotImplementedError
@@ -19,10 +20,10 @@ def get_storage() -> StorageResponse:  #noqa: D103
 def get_file(file_id: UUID) -> FileResponse:  #noqa: D103
     raise NotImplementedError
 
+
 @router.post("/")
-def post_file(  #noqa: D103
-    file: FileRequest,
-    storage: Annotated[QdrantStorage, Depends()]
+def post_file(  # noqa: D103
+    file: FileRequest, storage: Annotated[QdrantStorage, Depends()]
 ) -> HTMLResponse:
     storage.upload_file(data=file.data)
 
