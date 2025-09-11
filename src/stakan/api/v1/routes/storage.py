@@ -13,11 +13,12 @@ router = APIRouter()
 
 
 @router.get("/")
-def get_storage() -> StorageResponse:  #noqa: D103
+def get_storage() -> StorageResponse:  # noqa: D103
     raise NotImplementedError
 
+
 @router.get("/{file_id}")
-def get_file(file_id: UUID) -> FileResponse:  #noqa: D103
+def get_file(file_id: UUID) -> FileResponse:  # noqa: D103
     raise NotImplementedError
 
 
